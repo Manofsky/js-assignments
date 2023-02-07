@@ -22,7 +22,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-    throw new Error('Not implemented');
+    return width * height;
 }
 
 
@@ -38,7 +38,7 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCicleCircumference(radius) {
-    throw new Error('Not implemented');
+    return 2 * Math.PI * radius;
 }
 
 /**
@@ -54,7 +54,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    throw new Error('Not implemented');
+    return Number((BigInt(value1) + BigInt(value2))/2n);
 }
 
 /**
@@ -73,7 +73,9 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+    const CATHET_X = x2 - x1;
+    const CATHET_Y = y2 - y1;
+    return Math.hypot(CATHET_X, CATHET_Y);
 }
 
 /**
@@ -89,7 +91,8 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    throw new Error('Not implemented');
+  if (a === 0 || b === 0) return 0;
+  return -b / a;
 }
 
 
@@ -111,7 +114,11 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+    const VECTORS_LENGTH_1 = Math.hypot(x1, y1);
+    const VECTORS_LENGTH_2 = Math.hypot(x2, y2);
+    const VECTORS_DOT_PRODUCT = x1*x2 + y1*y2;
+    const COS_ANGLE = VECTORS_DOT_PRODUCT / (VECTORS_LENGTH_1 * VECTORS_LENGTH_2);
+    return Math.acos(COS_ANGLE);
 }
 
 /**
@@ -169,7 +176,7 @@ function getParallelipidedDiagonal(a,b,c) {
  * @param {number} num
  * @param {number} pow
  * @return {number}
- *  
+ *
  * @example:
  *   1234, 0  => 1234
  *   1234, 1  => 1230
@@ -190,7 +197,7 @@ function roundToPowerOfTen(num, pow) {
  *
  * @param {number} n
  * @return {bool}
- * 
+ *
  * @example:
  *   4 => false
  *   5 => true
