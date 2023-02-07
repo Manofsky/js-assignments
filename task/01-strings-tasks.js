@@ -242,7 +242,6 @@ function getRectangleString(width, height) {
  */
 function encodeToRot13(str) {
   const arr_en = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  const arr_EN = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
   const ALPHABET_LENGTH = 26;
   const ROT13 = 13;
   let result = str.split('');
@@ -250,11 +249,10 @@ function encodeToRot13(str) {
     return index >= ROT13 ? index + ROT13 - ALPHABET_LENGTH : index + ROT13;
   }
   for (let i = 0; i < str.length; i += 1) {
-    const arr = arr_en.includes(str[i]) ? arr_en : arr_EN.includes(str[i]) ? arr_EN : null;
-    if (arr === null) continue;
-    const index = arr.indexOf(str[i]);
+    const index = arr_en.indexOf(str[i].toLowerCase());
+    if (index === -1) continue;
     const rotatedIndex = rotated_index(index);
-    result[i] = arr[rotatedIndex];
+    result[i] = str[i] === str[i].toUpperCase() ? arr_en[rotatedIndex].toUpperCase() : arr_en[rotatedIndex];
 }
   return result.join('')
 }
