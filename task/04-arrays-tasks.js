@@ -583,7 +583,7 @@ function swapHeadAndTail(arr) {
   if (arr.length % 2 === 0) {
     return [].concat(arr.slice(arr.length/2)).concat(arr.slice(0, arr.length/2));
   }
-  return [].concat(arr.slice(arr.length/2 + 1)).concat(arr[(arr.length - 1)/2]).concat(arr.slice(0, arr.length/2));
+  return [].concat(arr.slice((arr.length + 1)/2)).concat(arr[(arr.length - 1)/2]).concat(arr.slice(0, (arr.length - 1)/2));
 }
 
 
