@@ -524,14 +524,13 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
   const map = new Map();
-  const keysArr = array.map(keySelector);
   const valuesArr = array.map(valueSelector);
-  array.map((value, index) => {
+  array.map(keySelector).map((value, index) => {
     let mapValues =[valuesArr[index]];
-    if (map.has(keysArr[index])) {
-      mapValues = map.get(keysArr[index]).concat(valuesArr[index]);
+    if (map.has(value)) {
+      mapValues = map.get(value).concat(valuesArr[index]);
     }
-    map.set(keysArr[index], mapValues)
+    map.set(value, mapValues)
   });
   return map;
 }
