@@ -166,7 +166,9 @@ function doRectanglesOverlap(rect1, rect2) {
  *
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+  const cathetX = circle.center.x - point.x;
+  const cathetY = circle.center.y - point.y;
+  return (circle.radius > Math.hypot(cathetX, cathetY));
 }
 
 
