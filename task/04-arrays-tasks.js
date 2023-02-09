@@ -523,7 +523,17 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-   throw new Error('Not implemented');
+  const map = new Map();
+  const keysArr = array.map(keySelector);
+  const valuesArr = array.map(valueSelector);
+  array.map((value, index) => {
+    let cities =[valuesArr[index]];
+    if (map.has(keysArr[index])) {
+      cities = map.get(keysArr[index]).concat(valuesArr[index]);
+    }
+    map.set(keysArr[index], cities)
+  });
+  return map;
 }
 
 
