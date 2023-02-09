@@ -527,11 +527,11 @@ function group(array, keySelector, valueSelector) {
   const keysArr = array.map(keySelector);
   const valuesArr = array.map(valueSelector);
   array.map((value, index) => {
-    let cities =[valuesArr[index]];
+    let mapValues =[valuesArr[index]];
     if (map.has(keysArr[index])) {
-      cities = map.get(keysArr[index]).concat(valuesArr[index]);
+      mapValues = map.get(keysArr[index]).concat(valuesArr[index]);
     }
-    map.set(keysArr[index], cities)
+    map.set(keysArr[index], mapValues)
   });
   return map;
 }
