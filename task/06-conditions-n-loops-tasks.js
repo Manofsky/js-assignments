@@ -30,7 +30,10 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+  if (num % 3 === 0 && num % 5 === 0) return 'FizzBuzz';
+  if (num % 3 === 0) return 'Fizz';
+  if (num % 5 === 0) return 'Buzz';
+  return num;
 }
 
 
@@ -46,7 +49,12 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+  if (n === 0) return 1;
+  let result = n;
+  for (let i = n - 1; i > 1; i -= 1) {
+    result *= i;
+  }
+  return result;
 }
 
 
@@ -63,7 +71,11 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    throw new Error('Not implemented');
+  let result = 0;
+  for (let i = n1; i <= n2; i += 1) {
+    result += i;
+  }
+  return result;
 }
 
 
@@ -82,30 +94,30 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+  return (a + b > c && a + c > b && c + b > a);
 }
 
 
 /**
  * Returns true, if two specified axis-aligned rectangles overlap, otherwise false.
- * Each rectangle representing by object 
+ * Each rectangle representing by object
  *  {
  *     top: 5,
  *     left: 5,
  *     width: 20,
  *     height: 10
  *  }
- * 
+ *
  *  (5;5)
- *     -------------  
- *     |           | 
+ *     -------------
+ *     |           |
  *     |           |  height = 10
- *     ------------- 
- *        width=20    
- * 
+ *     -------------
+ *        width=20
+ *
  * NOTE: Please use canvas coordinate space (https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes#The_grid),
  * it differs from Cartesian coordinate system.
- * 
+ *
  * @param {object} rect1
  * @param {object} rect2
  * @return {bool}
@@ -113,10 +125,10 @@ function isTriangle(a,b,c) {
  * @example:
  *   { top: 0, left: 0, width: 10, height: 10 },
  *   { top: 5, left: 5, width: 20, height: 20 }    =>  true
- * 
+ *
  *   { top: 0, left: 0, width: 10, height: 10 },
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
- *  
+ *
  */
 function doRectanglesOverlap(rect1, rect2) {
     throw new Error('Not implemented');
@@ -125,21 +137,21 @@ function doRectanglesOverlap(rect1, rect2) {
 
 /**
  * Returns true, if point lies inside the circle, otherwise false.
- * Circle is an object of 
+ * Circle is an object of
  *  {
  *     center: {
- *       x: 5,       
+ *       x: 5,
  *       y: 5
- *     },        
+ *     },
  *     radius: 20
  *  }
- * 
- * Point is object of 
+ *
+ * Point is object of
  *  {
  *     x: 5,
  *     y: 5
  *  }
- * 
+ *
  * @param {object} circle
  * @param {object} point
  * @return {bool}
@@ -147,7 +159,7 @@ function doRectanglesOverlap(rect1, rect2) {
  * @example:
  *   { center: { x:0, y:0 }, radius:10 },  { x:0, y:0 }     => true
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
- *   
+ *
  */
 function isInsideCircle(circle, point) {
     throw new Error('Not implemented');
@@ -166,7 +178,10 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+  for (let i = 0; i < str.length; i += 1) {
+    if (str.split(`${str[i]}`).length === 2) return str[i];
+  }
+  return null;
 }
 
 
@@ -192,7 +207,21 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-    throw new Error('Not implemented');
+  const roundLeftBracket = '(';
+  const roundRightBracket = ')';
+  const squareLeftBracket = '[';
+  const squareRightBracket = ']';
+  const digits = [a, b].sort((x, y) => x - y).join(', ');
+  if (isStartIncluded === false && isEndIncluded === false) {
+    return `${roundLeftBracket}${digits}${roundRightBracket}`;
+  }
+  if (isStartIncluded === true && isEndIncluded === true) {
+    return `${squareLeftBracket}${digits}${squareRightBracket}`;
+  }
+  if (isStartIncluded === false && isEndIncluded === true) {
+    return `${roundLeftBracket}${digits}${squareRightBracket}`;
+  }
+  return `${squareLeftBracket}${digits}${roundRightBracket}`;
 }
 
 
@@ -209,7 +238,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+  return str.split('').reverse().join('');
 }
 
 
@@ -226,7 +255,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+  return Number(num.toString().split('').reverse().join(''));
 }
 
 
@@ -270,7 +299,9 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+  const digitSum = num.toString().split('').reduce((previous, current) => previous + +current, 0);
+  if (digitSum < 10) return digitSum;
+  return digitSum.toString().split('').reduce((previous, current) => previous + +current, 0);
 }
 
 
@@ -293,7 +324,7 @@ function getDigitalRoot(num) {
  *   '[[][][[]]]' => true
  *   '[[][]][' => false
  *   '{)' = false
- *   '{[(<{[]}>)]}' = true 
+ *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(str) {
     throw new Error('Not implemented');
