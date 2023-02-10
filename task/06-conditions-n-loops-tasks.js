@@ -456,7 +456,22 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+  const copyPathes = pathes.map((value) => value.split('/'));
+  const maxLength = copyPathes.reduce((prev, curr) => {
+    return (prev < curr.length) ? curr.length : prev;
+  }, 0);
+  const result = [];
+  let isValid = true;
+  copyPathes.reduce((prev, curr) => {
+    for (let i = 0; i < maxLength; i += 1) {
+      if (prev[i] !== curr[i] && i === 0) isValid = false;
+      if (prev[i] === curr[i] && prev[i] === '' && result.at(-1) === '');
+      else if (prev[i] === curr[i] && prev[i] !== undefined) result.push(prev[i]);
+    }
+    return curr;
+  });
+  if (isValid && result[0] !== '/') return `${result.join('/')}/`;
+  return '';
 }
 
 
