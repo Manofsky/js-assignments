@@ -380,7 +380,35 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+  function round(num) {
+    let integer = Math.floor(num);
+    const fractionalPart = num - integer;
+    if (integer === 1) return 2;
+    return fractionalPart > .5 ? integer += 1 : integer;
+  }
+  const secPerMin = 60;
+  const minPerHour = 60;
+  const hourPerDay = 24;
+  const secs = (endDate - startDate)/1000;
+  const mins = secs/secPerMin;
+  const hours = mins/minPerHour;
+  const days = hours/hourPerDay;
+  const roundedMins = round(secs / 60);
+  const roundedHours = round(mins / 60);
+  const roundedDays = round(hours / 24);
+  const roundedMonth = round(days / 30);
+  const roundedYear = round(days / 365);
+  if (0 < secs && secs <= 45) return 'a few seconds ago';
+  if (45 < secs && secs <= 90) return 'a minute ago';
+  if (90 < secs && mins <= 45) return `${roundedMins} minutes ago`;
+  if (45 < mins && mins <= 90) return 'an hour ago';
+  if (90 < mins && hours <= 22) return `${roundedHours} hours ago`;
+  if (22 < hours && hours <= 36) return 'a day ago';
+  if (36 < hours && days <= 25) return `${roundedDays} days ago`;
+  if (25 < days && days <= 45) return 'a month ago';
+  if (45 < days && days <= 345) return `${roundedMonth} months ago`;
+  if (345 <= days && days <= 545) return 'a year ago';
+  if (days > 545) return `${roundedYear} years ago`;
 }
 
 
