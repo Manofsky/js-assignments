@@ -49,12 +49,9 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-  if (n === 0) return 1;
-  let result = n;
-  for (let i = n - 1; i > 1; i -= 1) {
-    result *= i;
-  }
-  return result;
+  return Array
+  .from({length: n}, (val, ind) => val = ind + 1)
+  .reduce((prev, curr) => prev * curr);
 }
 
 
@@ -213,21 +210,10 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-  const roundLeftBracket = '(';
-  const roundRightBracket = ')';
-  const squareLeftBracket = '[';
-  const squareRightBracket = ']';
   const digits = [a, b].sort((x, y) => x - y).join(', ');
-  if (isStartIncluded === false && isEndIncluded === false) {
-    return `${roundLeftBracket}${digits}${roundRightBracket}`;
-  }
-  if (isStartIncluded === true && isEndIncluded === true) {
-    return `${squareLeftBracket}${digits}${squareRightBracket}`;
-  }
-  if (isStartIncluded === false && isEndIncluded === true) {
-    return `${roundLeftBracket}${digits}${squareRightBracket}`;
-  }
-  return `${squareLeftBracket}${digits}${roundRightBracket}`;
+  const leftBracket = isStartIncluded === false ? '(' : '[';
+  const rightBracket = isEndIncluded === false ? ')' : ']';
+  return leftBracket + digits + rightBracket;
 }
 
 
@@ -305,9 +291,9 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  const digitSum = num.toString().split('').reduce((previous, current) => previous + +current, 0);
-  if (digitSum < 10) return digitSum;
-  return digitSum.toString().split('').reduce((previous, current) => previous + +current, 0);
+  num = num.toString().split('').reduce((previous, current) => previous + +current, 0);
+  if (num > 9) return getDigitalRoot(num);
+  return num;
 }
 
 
