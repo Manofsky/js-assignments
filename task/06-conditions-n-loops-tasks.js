@@ -527,7 +527,21 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+  const template = Array.from({length: position.length}).fill(Array.from({length: position.length}));
+  const rows = position.map((value) => value.join(''));
+  const columns = template.map((value, i) => {
+    return value.map((value, j) => {
+      return position[j][i];
+    }).join('');
+  });
+  let diagonals = Array.from({length: 2});
+  diagonals = diagonals.map((value, i) => {
+    return i ? (position[0][0] + position[1][1] + position[2][2]) : (position[0][2] + position[1][1] + position[2][0]);
+  });
+  let result = rows.includes('XXX') ? 'X' : rows.includes('000') ? '0' : undefined;
+  result = typeof result === 'string' ? result : columns.includes('XXX') ? 'X' : columns.includes('000') ? '0' : undefined;
+  result = typeof result === 'string' ? result : diagonals.includes('XXX') ? 'X' : diagonals.includes('000') ? '0' : undefined;
+  return result;
 }
 
 
