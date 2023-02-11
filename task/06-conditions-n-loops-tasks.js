@@ -456,13 +456,13 @@ function getCommonDirectoryPath(pathes) {
   let result = Array.from({length: maxLength}).fill('');
   copyPathes.reduce((prev, curr) => {
     result = result.map((v, i) => {
+      if (prev[i] === curr[i] && prev[i] === undefined) return '';
       if ((!i || i === result.length -1) && prev[i] === curr[i]) return '/';
       return prev[i] === curr[i] ? prev[i] + '/' : '';
     });
     return curr;
   });
-  result = result.join('');
-  return result === '//' ? '/' : result;
+  return result.join('');
 }
 
 
