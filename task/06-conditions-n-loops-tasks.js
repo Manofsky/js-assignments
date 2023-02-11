@@ -460,18 +460,16 @@ function getCommonDirectoryPath(pathes) {
   const maxLength = copyPathes.reduce((prev, curr) => {
     return (prev < curr.length) ? curr.length : prev;
   }, 0);
-  const result = [];
-  let isValid = true;
+  let result = Array.from({length: maxLength}).fill('');
   copyPathes.reduce((prev, curr) => {
-    for (let i = 0; i < maxLength; i += 1) {
-      if (prev[i] !== curr[i] && i === 0) isValid = false;
-      if (prev[i] === curr[i] && prev[i] === '' && result.at(-1) === '');
-      else if (prev[i] === curr[i] && prev[i] !== undefined) result.push(prev[i]);
-    }
+    result = result.map((v, i) => {
+      if ((!i || i === result.length -1) && prev[i] === curr[i]) return '/';
+      return prev[i] === curr[i] ? prev[i] + '/' : '';
+    });
     return curr;
   });
-  if (isValid && result[0] !== '/') return `${result.join('/')}/`;
-  return '';
+  result = result.join('');
+  return result === '//' ? '/' : result;
 }
 
 
